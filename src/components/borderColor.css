@@ -1,0 +1,127 @@
+.grass{
+    border: 2px solid lightgreen;
+  }
+  .bug{
+    border: 2px solid green;
+  }
+  .fire{
+    border: 2px solid #fd7d24;
+  }
+  .water{
+   border: 2px solid #4592c4;
+  }
+  .poison{
+    border: 2px solid #b97fc9;
+  }
+  .electric{
+    border: 2px solid #eed535;
+  }
+  .ground{
+    border: 2px solid #ab9842;
+  }
+  .fairy{
+    border: 2px solid #fdb9e8;
+  }
+  .fighting{
+    border: 2px solid #d56723;
+  }
+  .psychic{
+    border: 2px solid #f366b9;
+  }
+  .ghost{
+    border: 2px solid #7b62a3
+  }
+  .rock{
+    border: 2px solid #a28c21
+  }
+  .ice{
+    border: 2px solid #50c4e7;
+  }
+  .normal{
+    border: 2px solid grey;
+  }
+
+
+
+  .type{
+    text-decoration: none!important;
+    height: 30px;
+    color: white;
+  }
+
+  .grasst{
+    background-color: lightgreen;
+    border-radius: 5px;
+    color: black !important;
+
+  }
+  .bugt{
+    background-color:  green;
+    border-radius: 5px;
+
+  }
+  .firet{
+    background-color:  #fd7d24;
+    border-radius: 5px;
+
+  }
+  .watert{
+    background-color:  #4592c4;
+    border-radius: 5px;
+
+  }
+  .poisont{
+    background-color:  #b97fc9;
+    border-radius: 5px;
+
+  }
+  .electrict{
+    background-color:  #eed535;
+    border-radius: 5px;
+
+  }
+  .groundt{
+    background-color:  #ab9842;
+    border-radius: 5px;
+
+  }
+  .fairyt{
+    background-color:  #fdb9e8;
+    border-radius: 5px;
+  }
+  .fightingt{
+    background-color:  #d56723;
+    border-radius: 5px;
+  }
+  .psychict{
+    background-color:  #f366b9;
+    border-radius: 5px;
+  }
+  .ghostt{
+    background-color:  #7b62a3;
+    border-radius: 5px;
+  }
+  .rockt{
+    background-color:  #a28c21;
+    border-radius: 5px;
+  }
+  .icet{
+    background-color:  #50c4e7;
+    border-radius: 5px;
+
+  }
+  .normalt{
+    background-color:  grey;
+    border-radius: 5px;
+  }
+  .flyingt{
+    background: linear-gradient(180deg, rgba(62,199,239,1) 50%,  rgba(189,185,184,1) 50%) !important;
+    border-radius: 5px;
+  }
+
+  .black-text{
+    height: 30px;
+    text-decoration: none !important;
+    color: black !important; 
+  }
+

@@ -1,0 +1,148 @@
+/* styles for Home.js */
+body{
+ background-color: black;
+}
+
+
+.home{
+  margin: 0px !important;
+  padding: 0px !important;
+  background-color: black;
+}
+
+.main-card{
+  background-color: rgba(35,34,34,255);
+}
+
+.main-container{
+ padding-left: 100px;
+ padding-right: 100px;
+}
+
+.title-white{
+  color: white;
+}
+
+.circle{
+  background: linear-gradient(180deg, rgba(92,92,106,1) 9%, rgba(1,3,9,1) 99%);
+  /* border-radius: 107.5px; */
+  width: 215px; 
+  height: 215px;
+  border: 4px solid grey;
+}
+.imgu {
+  width: 100%;
+  height: 100%;
+}
+
+.home-img{
+  max-height: 170px;
+}
+
+/*  styles for pokemon.js */
+
+.vertical-stat{
+  width: 100%;
+  height: 100%;
+  background-color: white !important ;
+  border-radius: 5px;
+  position: relative;
+}
+.load{
+  position: absolute;
+  background-color: #30a7d7;
+  width: inherit;
+  border-radius: 5px;
+  bottom: 0 ;
+}
+.spl-load{
+  position: absolute;
+  background-color: #de5c42;
+  width: inherit;
+  border-radius: 5px;
+  bottom: 0 ;
+}
+
+.rofix{
+  height: 200px;
+  width: 100%;
+}
+
+@media(min-width: 300px) and (max-width: 768px) {
+  .m3 {
+    width: 16.66% !important;
+  }
+}
+
+@media(max-width: 767px) and (min-width: 300px){
+  .d2{
+    width: 50% !important;
+  }
+}
+  @media(max-width: 767px) and (min-width: 300px){
+    .r3{
+      width: 33.33% !important;
+    }
+}
+
+.stat-name{
+  position: absolute;
+  bottom: -21px;
+}
+
+.statcol{
+  background-color: rgb(164,164,164);
+  border-radius: 10px;
+  height: 300px;
+} 
+
+.char{
+  height: 200px;
+  background-color: #30a7d7;
+  border-radius: 10px;
+}
+
+
+.pikachu{
+  position: relative;
+display: block;
+top: 25vh;
+width: 300px;
+height: 250px;
+}
+
+.numberstyle{
+  color: #616161;
+}
+
+.title-text{
+  font-weight: 400;
+  color: white;
+}
+.description{
+  width: 100%;
+  border-radius: 10px;
+}
+.main-img{
+  background-color: #a4a4a4;
+  border-radius: 10px;
+}
+.box{
+  width: 100%;
+  height: 30px;
+}
+
+.child {
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  transform-origin: bottom;
+}
+.bounce:hover {
+  animation-name: bounce;
+  animation-timing-function: ease;
+}
+@keyframes bounce {
+0%   { transform: translateY(0); }
+50%  { transform: translateY(-15px); }
+100% { transform: translateY(0); }
+}
