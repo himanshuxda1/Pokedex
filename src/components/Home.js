@@ -76,14 +76,13 @@ export default function Practice() {
     } else { return "container main-container" }
 
   }
-  const textCheck = (e) => {
-    if (e === "grass") {
-      return "black-text d-flex justify-content-center align-items-center"
-    } else { return "type d-flex justify-content-center align-items-center" }
-  }
+  // const textCheck = (e) => {
+  //   if (e === "grass") {
+  //     return "black-text d-flex justify-content-center align-items-center"
+  //   } else { return "type d-flex justify-content-center align-items-center" }
+  // }
   const [size, setSize] = useState(window.innerWidth)
   const [pokemon, setPokemon] = useState([])
-  const [newPokemon, setNewPokemon] = useState([])
 
   // use effect for detecting window resize
   useEffect(() => {
@@ -93,7 +92,7 @@ export default function Practice() {
     }
     window.addEventListener('resize', updateWindowDimensions)
     return () => window.removeEventListener('resize', updateWindowDimensions)
-  }, [])
+  }, [size])
 
   // Main use effect
   useEffect(() => { GetPokemon() }, [])
@@ -264,4 +263,3 @@ export default function Practice() {
 
 
 
-{ }

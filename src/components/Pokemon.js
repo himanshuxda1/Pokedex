@@ -103,11 +103,11 @@ export default function Pokemon() {
         }
         window.addEventListener('resize', updateWindowDimensions)
         return () => window.removeEventListener('resize', updateWindowDimensions)
-    }, [])
+    }, [size])
 
 
     // main use effect
-    useEffect(() => { ShowPokemon(); getSpecies() }, [url])
+    useEffect(() => { ShowPokemon(); getSpecies() })
 
     const ShowPokemon = () => {
         const requestOptions = {
