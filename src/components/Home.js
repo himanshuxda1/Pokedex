@@ -106,7 +106,7 @@ export default function Practice() {
     fetch("https://pokeapi.co/api/v2/pokemon", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        setLoading(false)
+        
         const pokemonPromises = result.results.map((items) => {
           const number = items.url.split("/").slice(-2, -1)[0];
           const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${number}.png`;
@@ -140,7 +140,7 @@ export default function Practice() {
               next: result.next,
               previous: result.previous,
               results: pokemonData,
-            };
+            };setLoading(false)
             setPokemon(obj);
           })
           .catch((error) => console.error(error));
