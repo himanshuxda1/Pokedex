@@ -19,10 +19,10 @@ body{
   background-color: rgba(35,34,34,255);
 }
 
-/* .main-container{
- padding-left: 100px;
- padding-right: 100px;
-} */
+.main-container{
+ padding-left: 50px;
+ padding-right: 50px;
+}
 
 .title-white{
   color: white;
