@@ -3,6 +3,7 @@
 import { React, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import "./borderColor.css"
+import Navbar from './Navbar';
 
 
 
@@ -106,7 +107,7 @@ export default function Practice() {
     fetch("https://pokeapi.co/api/v2/pokemon", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        
+
         const pokemonPromises = result.results.map((items) => {
           const number = items.url.split("/").slice(-2, -1)[0];
           const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${number}.png`;
@@ -132,7 +133,7 @@ export default function Practice() {
         });
 
         // Wait for all promises to resolve
-                // Wait for all promises to resolve
+        // Wait for all promises to resolve
         Promise.all(pokemonPromises)
           .then((pokemonData) => {
             const obj = {
@@ -140,7 +141,7 @@ export default function Practice() {
               next: result.next,
               previous: result.previous,
               results: pokemonData,
-            };setLoading(false)
+            }; setLoading(false)
             setPokemon(obj);
           })
           .catch((error) => console.error(error));
@@ -194,53 +195,44 @@ export default function Practice() {
   }
 
   return (
-    <>
-    <div className='container-fluid home'>
-      <div className="navb">
-        <nav className="navbar navbar-expand-lg bg-dark">
-          <div className="container">
-            <a className="navbar-brand" href="/">
-              <img src="/images/game.png" alt="" style={{ height: "50px", width: "50px" }} />
-              <span className='mx-3 title-white'>Pokedex</span>
-            </a>
+    <div className='container-fluid top'>
+      <div className='container-fluid home'>
+        <Navbar />
+        {loading ? <div className="d-flex pika">
+          <img className='pikachu mx-auto my-auto' src="../images/pikachu_loading.gif" alt="Loading..." />
+        </div> : <div className={marginCollapse()} >
+          <div className="row my-3">
+            {pokemon?.results?.map((items, index) => (
+              <div className='col-md-3 my-1' key={index}>
+                <Link to={"/pokemon"} state={{ data: items.number }} className={typeBorder(items.type)}>
+                  <div className="card-header d-flex justify-content-center align-items-center cheader">
+                    <div className="rounded-circle circle my-1" >
+                      <div className="imgu d-flex justify-content-center align-items-center">
+                        <img className='img-fluid home-img' src={items.image} alt="" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card-body ">
+                    <h5 className='title-white'>{items.name.charAt(0).toUpperCase() + items.name.slice(1)}</h5>
+                    <div className='row'>
+                      <div className="col-md-6">
+                        <div className={typeColor(items.type)}>
+                          <span className="black-text d-flex justify-content-center align-items-center">{items.type.charAt(0).toUpperCase() + items.type.slice(1)}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </div>)
+            )}
           </div>
-        </nav>
+          <div className="text-center" style={{ position: "relative" }}>
+            <button onClick={getNext} className='btn btn-primary text-center mb-5'>Load More</button>
+          </div>
+        </div>}
       </div>
-      {loading ? <div className="d-flex pika">
-      <img className='pikachu mx-auto my-auto' src="../images/pikachu_loading.gif" alt="Loading..." />
-      </div> : <div className={marginCollapse()} >
-<div className="row my-3">
-  {pokemon?.results?.map((items, index) => (
-    <div className='col-md-3 my-1' key={index}>
-      <Link to={"/pokemon"} state={{ data: items.number }} className={typeBorder(items.type)}>
-        <div className="card-header d-flex justify-content-center align-items-center cheader">
-          <div className="rounded-circle circle my-1" >
-            <div className="imgu d-flex justify-content-center align-items-center">
-              <img className='img-fluid home-img' src={items.image} alt="" />
-            </div>
-          </div>
-        </div>
-        <div className="card-body ">
-          <h5 className='title-white'>{items.name.charAt(0).toUpperCase() + items.name.slice(1)}</h5>
-          <div className='row'>
-            <div className="col-md-6">
-              <div className={typeColor(items.type)}>
-                <span className="black-text d-flex justify-content-center align-items-center">{items.type.charAt(0).toUpperCase() + items.type.slice(1)}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Link>
-    </div>)
-  )}
-</div>
-<div className="text-center" style={{ position: "relative" }}>
-  <button onClick={getNext} className='btn btn-primary text-center mb-5'>Load More</button>
-</div>
-</div> }
+
     </div>
-    
-    </>
   )
 }
 

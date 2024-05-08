@@ -3,6 +3,11 @@ body{
  background-color: black;
 }
 
+.top{
+  padding-left: 0px;
+  padding-right: 0px
+}
+
 
 .home{
   margin: 0px !important;
@@ -14,10 +19,10 @@ body{
   background-color: rgba(35,34,34,255);
 }
 
-.main-container{
+/* .main-container{
  padding-left: 100px;
  padding-right: 100px;
-}
+} */
 
 .title-white{
   color: white;

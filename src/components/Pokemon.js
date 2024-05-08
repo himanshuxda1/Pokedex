@@ -1,14 +1,16 @@
 
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import Navbar from './Navbar';
+
 
 export default function Pokemon() {
 
     const typeColor = (e) => {
-        if (e === "grass") { 
-            return "grasst" 
-        }else if (e === "water")  { 
-            return "watert" 
+        if (e === "grass") {
+            return "grasst"
+        } else if (e === "water") {
+            return "watert"
         } else if (e === "fire") {
             return "firet"
         } else if (e === "bug") {
@@ -33,7 +35,7 @@ export default function Pokemon() {
             return "icet"
         } else if (e === "normal") {
             return "normalt"
-        } else if(e === "flying"){
+        } else if (e === "flying") {
             return "flyingt"
         }
 
@@ -122,6 +124,7 @@ export default function Pokemon() {
     }
     return (
         <div className="mainbox">
+            <Navbar />
             <div className='container'>
                 <div className="my-5 text-center">
                     <div className="title">
