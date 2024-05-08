@@ -9,6 +9,7 @@ export default function Practice() {
 
   const [loading, setLoading] = useState(true);
   const [nextLoading, setNextLoading] = useState(false);
+  const [searchData, setSearchData] = useState([])
 
   // this function sets the border color of the cards based on type
   const typeBorder = (e) => {
@@ -99,9 +100,9 @@ export default function Practice() {
   }, [size])
 
   // Main use effect
-  useEffect(() => { GetPokemon() }, [])
+  useEffect(() => { getPokemon(); GetSearchData() }, [])
 
-  const GetPokemon = () => {
+  const getPokemon = () => {
     const requestOptions = {
       method: "GET",
       redirect: "follow",
@@ -123,7 +124,6 @@ export default function Practice() {
             .then((result) => {
               const type = result.types[0].type.name;
 
-              // console.log(type);
 
               return {
                 name: items.name,
@@ -151,6 +151,20 @@ export default function Practice() {
       })
       .catch((error) => console.error(error));
   };
+
+  const GetSearchData = () =>{
+    const requestOptions = {
+      method: "GET",
+      redirect: "follow"
+    };
+    
+    fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=1302", requestOptions)
+      .then((response) => response.json())
+      .then((result) => console.log(result))
+      .catch((error) => console.error(error));
+  }
+
+  // This fetches next 20 on load more 
   const getNext = () => {
     setNextLoading(true);
     const requestOptions = {
