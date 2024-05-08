@@ -10,6 +10,7 @@ import Navbar from './Navbar';
 export default function Practice() {
 
   const [loading, setLoading] = useState(true);
+  const [nextLoading, setNextLoading] = useState(false);
 
   // this function sets the border color of the cards based on type
   const typeBorder = (e) => {
@@ -149,6 +150,7 @@ export default function Practice() {
       .catch((error) => console.error(error));
   };
   const getNext = () => {
+    setNextLoading(true);
     const requestOptions = {
       method: "GET",
       redirect: "follow"
@@ -188,6 +190,7 @@ export default function Practice() {
               results: [...pokemon.results, ...pokedata]
             }
             setPokemon(newData)
+            setNextLoading(false)
           })
           .catch((error) => console.error(error));
       })
@@ -227,7 +230,8 @@ export default function Practice() {
             )}
           </div>
           <div className="text-center" style={{ position: "relative" }}>
-            <button onClick={getNext} className='btn btn-primary text-center mb-5'>Load More</button>
+            {nextLoading ? <h6><img style={{height:"100px", width:"150px"}} src="../images/pikachu_loading.gif" alt="" /></h6> :<button onClick={getNext} className='btn btn-primary text-center mb-5'>Load More</button> }
+            
           </div>
         </div>}
       </div>
