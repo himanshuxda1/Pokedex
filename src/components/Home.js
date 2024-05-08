@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom'
 import "./borderColor.css"
 import Navbar from './Navbar';
 
-
-
 export default function Practice() {
 
   const [loading, setLoading] = useState(true);
@@ -38,7 +36,9 @@ export default function Practice() {
       return "card bounce child my-3 main-card rock"
     } else if (e === "ice") {
       return "card bounce child my-3 main-card ice"
-    } else if (e === "normal") {
+    }  else if (e === "dragon"){
+      return "card bounce child my-3 main-card dragon"
+    } else {
       return "card bounce child my-3 main-card normal"
     }
 
@@ -67,7 +67,9 @@ export default function Practice() {
       return "rockt"
     } else if (e === "ice") {
       return "icet"
-    } else if (e === "normal") {
+    } else if (e === "dragon"){
+      return "dragont"
+    } else {
       return "normalt"
     }
 
