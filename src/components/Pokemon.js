@@ -193,27 +193,7 @@ export default function Pokemon() {
                                         <span className='text-white'>{pokemane.types[1].type.name.charAt(0).toUpperCase() + pokemane.types[1].type.name?.slice(1)}</span>
                                     </div>
                                 </div> : null}
-
                         </div>
-
-                        {/* <div className="row">
-                            <span className='my-3'><h4>Weakness</h4></span>
-                            <div className="col-md-4 r3">
-                                <div className="box d-flex justify-content-center align-items-center">
-                                    <span className='text-white'>Water</span>
-                                </div>
-                            </div>
-                            <div className="col-md-4 r3">
-                                <div className="box d-flex justify-content-center align-items-center">
-                                    <span className='text-white'>Ground</span>
-                                </div>
-                            </div>
-                            <div className="col-md-4 r3">
-                                <div className="box d-flex justify-content-center align-items-center">
-                                    <span className='text-white'>Rock</span>
-                                </div>
-                            </div>
-                        </div> */}
                     </div>
                 </div>
             </div>

@@ -1,15 +1,84 @@
 
 
-import { React, useEffect, useState } from 'react'
+import { React, useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import "./borderColor.css"
-import Navbar from './Navbar';
+
 
 export default function Practice() {
-
+  const refOne = useRef(null)
+  const refTwo = useRef(null)
   const [loading, setLoading] = useState(true);
   const [nextLoading, setNextLoading] = useState(false);
-  const [searchData, setSearchData] = useState([])
+  const [searchData, setSearchData] = useState(null)
+  const [filterDat, setFilterDat] = useState(null)
+  const [searchEmpty, setSearchEmpty] = useState(true)
+  const [outside, setOutside] = useState(null)
+  const [inputVal, setInputVal] = useState("")
+ 
+
+  // This detects clicks outside the input
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, true)
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true)
+    };
+  }, [])
+
+  // This function sets the click outside state
+  const handleClickOutside = (e) => {
+    if (refOne.current && refTwo.current) { // Check if refs are not null
+      if (!refOne.current.contains(e.target) && !refTwo.current.contains(e.target)) {
+        console.log("outside");
+        setOutside(true);
+      } else {
+        console.log("inside");
+        setOutside(false);
+      }
+    }
+  }
+
+  const giveState =(filterDat) => {
+    if(filterDat !== null){
+      return filterDat[0].url.split("/").slice(-2, -1)[0]
+    } 
+  }
+  // This is the fitler function that filters the searchData on input
+  function filterData(searchValue) {
+    if (searchValue === "") {
+      setSearchEmpty(true)
+    } else {
+      setSearchEmpty(false)
+      const filteredData = (searchData.filter(item => item.name.includes(searchValue)));
+      setFilterDat(filteredData);
+      console.log(filteredData);
+    }
+  }
+
+  // This generates the list items or suggestions
+  const listGenerator = () => {
+    if (outside === true) {
+      return null
+    } else if (outside === false) {
+      if (searchEmpty === false) {
+        if (filterDat !== null) {
+          return filterDat?.map((items, indx) => {
+            if (indx <= 10) {
+              return <li onClick={() => handleListSelect(items.name.charAt(0).toUpperCase() + items.name.slice(1))}  key={indx}>{items.name.charAt(0).toUpperCase() + items.name.slice(1)}</li>
+            }
+          })
+        }
+      } else {
+        return null;
+      }
+    }
+  }
+  // This will make selection from the list possible on click
+  const handleListSelect = (pokeName) => {
+    setInputVal(pokeName)
+    refOne.current.value = pokeName;
+    setOutside(true)
+  }
 
   // this function sets the border color of the cards based on type
   const typeBorder = (e) => {
@@ -37,7 +106,7 @@ export default function Practice() {
       return "card bounce child my-3 main-card rock"
     } else if (e === "ice") {
       return "card bounce child my-3 main-card ice"
-    }  else if (e === "dragon"){
+    } else if (e === "dragon") {
       return "card bounce child my-3 main-card dragon"
     } else {
       return "card bounce child my-3 main-card normal"
@@ -68,7 +137,7 @@ export default function Practice() {
       return "rockt"
     } else if (e === "ice") {
       return "icet"
-    } else if (e === "dragon"){
+    } else if (e === "dragon") {
       return "dragont"
     } else {
       return "normalt"
@@ -81,11 +150,7 @@ export default function Practice() {
     } else { return "container main-container" }
 
   }
-  // const textCheck = (e) => {
-  //   if (e === "grass") {
-  //     return "black-text d-flex justify-content-center align-items-center"
-  //   } else { return "type d-flex justify-content-center align-items-center" }
-  // }
+
   const [size, setSize] = useState(window.innerWidth)
   const [pokemon, setPokemon] = useState([])
 
@@ -98,6 +163,13 @@ export default function Practice() {
     window.addEventListener('resize', updateWindowDimensions)
     return () => window.removeEventListener('resize', updateWindowDimensions)
   }, [size])
+
+  // Once the serach data is ready it is logged
+  useEffect(() => {
+    if (searchData !== null)
+      // console.log(searchData)
+      ;
+  }, [searchData])
 
   // Main use effect
   useEffect(() => { getPokemon(); GetSearchData() }, [])
@@ -136,7 +208,6 @@ export default function Practice() {
         });
 
         // Wait for all promises to resolve
-        // Wait for all promises to resolve
         Promise.all(pokemonPromises)
           .then((pokemonData) => {
             const obj = {
@@ -152,15 +223,15 @@ export default function Practice() {
       .catch((error) => console.error(error));
   };
 
-  const GetSearchData = () =>{
+  const GetSearchData = () => {
     const requestOptions = {
       method: "GET",
       redirect: "follow"
     };
-    
+
     fetch("https://pokeapi.co/api/v2/pokemon?offset=0&limit=1302", requestOptions)
       .then((response) => response.json())
-      .then((result) => console.log(result))
+      .then((result) => { setSearchData(result.results) })
       .catch((error) => console.error(error));
   }
 
@@ -215,8 +286,29 @@ export default function Practice() {
 
   return (
     <div className='container-fluid top'>
-      <div className='container-fluid home'>
-        <Navbar />
+      <div className='home'>
+        <nav className="navbar navbar-expand-lg bg-dark">
+          <div className='row align-items-center rowl'>
+            <div className="col-md-6">
+              <Link to={"/"} className="navbar-brand ms-3" href="/">
+                <img src="/images/game.png" alt="" style={{ height: "50px", width: "50px" }} />
+                <span className='mx-3 title-white'>Pokedex</span>
+              </Link>
+            </div>
+            <div className="col-md-6">
+              <form className="d-flex align-items-center " role="search">
+                <div className='mx-2' style={{ width: "100%", position: "relative" }}><input ref={refOne} style={{ borderBottomLeftRadius: "0px", borderBottomRightRadius: "0px" }} onChange={(e) => filterData(e.target.value.toLowerCase())} className="form-control me-2 align-middle" type="search" placeholder="Search Pokemon" aria-label="Search" />
+                  <ul ref={refTwo} className='suggestions'>
+                    {listGenerator()}
+                  </ul>
+                </div>
+                <Link to={"/pokemon"} state={{ data: giveState(filterDat)}} className="btn btn-outline-success" type="button">
+                  Search
+                </Link>
+              </form>
+            </div>
+          </div>
+        </nav>
         {loading ? <div className="d-flex pika">
           <img className='pikachu mx-auto my-auto' src="../images/pikachu_loading.gif" alt="Loading..." />
         </div> : <div className={marginCollapse()} >
@@ -246,32 +338,10 @@ export default function Practice() {
             )}
           </div>
           <div className="text-center" style={{ position: "relative" }}>
-            {nextLoading ? <h6><img style={{height:"100px", width:"150px"}} src="../images/pikachu_loading.gif" alt="" /></h6> :<button onClick={getNext} className='btn btn-primary text-center mb-5'>Load More</button> }
-            
+            {nextLoading ? <h6><img style={{ height: "100px", width: "150px" }} src="../images/pikachu_loading.gif" alt="" /></h6> : <button onClick={getNext} className='btn btn-primary text-center mb-5'>Load More</button>}
           </div>
         </div>}
       </div>
-
     </div>
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

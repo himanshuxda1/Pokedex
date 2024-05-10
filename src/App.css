@@ -3,12 +3,32 @@ body{
  background-color: black;
 }
 
+.rowl{
+  width: 100%;
+}
 .top{
   padding-left: 0px;
   padding-right: 0px
 }
 
-
+li{
+  padding: 0;
+  padding-left: 12px;
+}
+li:hover{
+background-color: goldenrod;
+}
+.suggestions{ 
+  color: black ; 
+  background-color: white;
+  list-style: none;
+  padding: 0;
+  z-index: 5;
+  position: absolute;
+  width: 100%;
+  top: 38px;
+  
+}
 .home{
   margin: 0px !important;
   padding: 0px !important;
