@@ -289,13 +289,13 @@ export default function Practice() {
       <div className='home'>
         <nav className="navbar navbar-expand-lg bg-dark">
           <div className='row align-items-center rowl'>
-            <div className="col-md-6">
+            <div className="col-md-6 my-2">
               <Link to={"/"} className="navbar-brand ms-3" href="/">
                 <img src="/images/game.png" alt="" style={{ height: "50px", width: "50px" }} />
                 <span className='mx-3 title-white'>Pokedex</span>
               </Link>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-6 my-2">
               <form className="d-flex align-items-center " role="search">
                 <div className='mx-2' style={{ width: "100%", position: "relative" }}><input ref={refOne} style={{ borderBottomLeftRadius: "0px", borderBottomRightRadius: "0px" }} onChange={(e) => filterData(e.target.value.toLowerCase())} className="form-control me-2 align-middle" type="search" placeholder="Search Pokemon" aria-label="Search" />
                   <ul ref={refTwo} className='suggestions'>
