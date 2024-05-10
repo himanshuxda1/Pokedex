@@ -14,8 +14,7 @@ export default function Practice() {
   const [filterDat, setFilterDat] = useState(null)
   const [searchEmpty, setSearchEmpty] = useState(true)
   const [outside, setOutside] = useState(null)
-  const [inputVal, setInputVal] = useState("")
- 
+
 
   // This detects clicks outside the input
   useEffect(() => {
@@ -38,10 +37,10 @@ export default function Practice() {
     }
   }
 
-  const giveState =(filterDat) => {
-    if(filterDat !== null){
+  const giveState = (filterDat) => {
+    if (filterDat !== null) {
       return filterDat[0].url.split("/").slice(-2, -1)[0]
-    } 
+    }
   }
   // This is the fitler function that filters the searchData on input
   function filterData(searchValue) {
@@ -64,8 +63,10 @@ export default function Practice() {
         if (filterDat !== null) {
           return filterDat?.map((items, indx) => {
             if (indx <= 10) {
-              return <li onClick={() => handleListSelect(items.name.charAt(0).toUpperCase() + items.name.slice(1))}  key={indx}>{items.name.charAt(0).toUpperCase() + items.name.slice(1)}</li>
-            }
+              return <li onClick={(e) => {
+                handleListSelect(items.name.charAt(0).toUpperCase() + items.name.slice(1)); filterData(items.name.toLowerCase());
+              }} key={indx}>{items.name.charAt(0).toUpperCase() + items.name.slice(1)}</li>
+            } else { return null }
           })
         }
       } else {
@@ -75,7 +76,6 @@ export default function Practice() {
   }
   // This will make selection from the list possible on click
   const handleListSelect = (pokeName) => {
-    setInputVal(pokeName)
     refOne.current.value = pokeName;
     setOutside(true)
   }
@@ -302,7 +302,7 @@ export default function Practice() {
                     {listGenerator()}
                   </ul>
                 </div>
-                <Link to={"/pokemon"} state={{ data: giveState(filterDat)}} className="btn btn-outline-success" type="button">
+                <Link to={"/pokemon"} state={{ data: giveState(filterDat) }} className="btn btn-outline-success" type="button">
                   Search
                 </Link>
               </form>
