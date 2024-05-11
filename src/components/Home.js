@@ -38,7 +38,7 @@ export default function Practice() {
   }
 
   const giveState = (filterDat) => {
-    if (filterDat !== null) {
+    if (filterDat !== null && filterDat !== "" && filterDat.length !== 0 ) {
       return filterDat[0].url.split("/").slice(-2, -1)[0]
     }
   }
