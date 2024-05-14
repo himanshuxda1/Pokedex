@@ -49,7 +49,7 @@ export default function Pokemon() {
 
         fetch(`https://pokeapi.co/api/v2/pokemon-species/${url}`, requestOptions)
             .then((response) => response.json())
-            .then((result) => { console.log(result); const bablu = result.flavor_text_entries.filter(checkEngl => { return checkEngl.language.name === "en" }); setDesc(bablu); setLoading(false); console.log(bablu); })
+            .then((result) => { console.log(result); const bablu = result.flavor_text_entries.filter(checkEngl => { return checkEngl.language.name === "en" }); setDesc(bablu); console.log(bablu); })
             .catch((error) => console.error(error));
 
     }
@@ -120,13 +120,13 @@ export default function Pokemon() {
 
         fetch(`https://pokeapi.co/api/v2/pokemon/${url}`, requestOptions)
             .then((response) => response.json())
-            .then((result) => { setPokemane(result) })
+            .then((result) => { setPokemane(result); setLoading(false); })
             .catch((error) => console.error(error));
     }
     return (
         <div className="mainbox">
             <Navbar />
-            { loading? <div className="d-flex pika">
+            {loading ? <div className="d-flex pika">
           <img className='pikachu mx-auto my-auto' src="../images/pikachu_loading.gif" alt="Loading..." />
         </div> : <> <div className='container'>
                 <div className="my-5 text-center">
