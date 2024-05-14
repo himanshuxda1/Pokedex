@@ -49,7 +49,7 @@ export default function Pokemon() {
 
         fetch(`https://pokeapi.co/api/v2/pokemon-species/${url}`, requestOptions)
             .then((response) => response.json())
-            .then((result) => { console.log(result); const bablu = result.flavor_text_entries.filter(checkEngl => { return checkEngl.language.name === "en" }); setDesc(bablu); console.log(bablu); })
+            .then((result) => { console.log(result); const bablu = result.flavor_text_entries.filter(checkEngl => { return checkEngl.language.name === "en" }); setDesc(bablu); setLoading(false); console.log(bablu); })
             .catch((error) => console.error(error));
 
     }
@@ -96,6 +96,7 @@ export default function Pokemon() {
     const url = location?.state?.data;
     const [pokemane, setPokemane] = useState([])
     const [size, setSize] = useState(window.innerWidth)
+    const [loading, setLoading] = useState(true)
 
     // use effect for detecting window resize
     useEffect(() => {
@@ -125,7 +126,9 @@ export default function Pokemon() {
     return (
         <div className="mainbox">
             <Navbar />
-            <div className='container'>
+            { loading? <div className="d-flex pika">
+          <img className='pikachu mx-auto my-auto' src="../images/pikachu_loading.gif" alt="Loading..." />
+        </div> : <> <div className='container'>
                 <div className="my-5 text-center">
                     <div className="title">
                         {pokemane.name ? <h1 className='title-text'>{pokemane?.name?.charAt(0).toUpperCase() + pokemane?.name?.slice(1)}<span className='numberstyle'> #000{url}</span></h1> : null}
@@ -196,7 +199,8 @@ export default function Pokemon() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div></> }
+           
         </div >
     )
 }

@@ -39,7 +39,10 @@ export default function Practice() {
 
   const giveState = (filterDat) => {
     if (filterDat !== null && filterDat !== "" && filterDat.length !== 0 ) {
-      return filterDat[0].url.split("/").slice(-2, -1)[0]
+      if(filterDat.length === 4){
+        return filterDat[1].url.split("/").slice(-2, -1)[0]
+      } else {return filterDat[0].url.split("/").slice(-2, -1)[0]}
+      
     }
   }
   // This is the fitler function that filters the searchData on input
